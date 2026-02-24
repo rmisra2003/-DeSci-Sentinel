@@ -10,8 +10,8 @@ import { archivistService } from '../services/ipfs.js';
 import { bioTokenService } from '../services/bio-token.js';
 import { getBioDaoTokens, getBioDaoTokensWithOnChain } from '../services/biodao.js';
 import { Connection, PublicKey } from '@solana/web3.js';
-import { plagiarismService } from '../services/plagiarism';
-import { getBioLaunchpadProjects } from '../services/bio-launchpad';
+import { plagiarismService } from '../services/plagiarism.js';
+import { getBioLaunchpadProjects } from '../services/bio-launchpad.js';
 import { BIODAO_METADATA } from '../services/biodao.js';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
