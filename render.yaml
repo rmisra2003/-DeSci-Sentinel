@@ -6,9 +6,8 @@ services:
     name: desci-sentinel-backend
     env: node
     region: oregon
-    rootDir: bio-scholar-backend
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: ./render-build.sh
+    startCommand: cd bio-scholar-backend && npm start
     envVars:
       - key: NODE_VERSION
         value: "20"
@@ -36,9 +35,8 @@ services:
     name: desci-sentinel-frontend
     env: static
     region: oregon
-    rootDir: Frontend
-    buildCommand: npm install && npm run build
-    publishPath: dist
+    buildCommand: ./render-build.sh
+    publishPath: Frontend/dist
     envVars:
       - key: NODE_VERSION
         value: "20"
