@@ -6,7 +6,7 @@ services:
     name: desci-sentinel-backend
     env: node
     region: oregon
-    rootDir: desci-sentinel-backend
+    rootDir: bio-scholar-backend
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
