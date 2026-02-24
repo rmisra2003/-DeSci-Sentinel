@@ -1,0 +1,10 @@
+{
+    "name": "desci-sentinel-root",
+    "version": "1.0.0",
+    "description": "Root package.json to intercept Render's default deployment commands.",
+    "scripts": {
+        "start": "cd bio-scholar-backend && npm start",
+        "build": "./render-build.sh"
+    },
+    "private": true
+}
