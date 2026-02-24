@@ -1,0 +1,1 @@
+/Users/rammisra/Desktop/BIO-Agent/bio-scholar-backend/target/sbpf-solana-solana/release/bio_scholar_vault.so: /Users/rammisra/Desktop/BIO-Agent/bio-scholar-backend/programs/bio_scholar_vault/src/lib.rs

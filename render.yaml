@@ -1,0 +1,53 @@
+services:
+  # ==========================================
+  # DeSci Sentinel API Backend (Node.js)
+  # ==========================================
+  - type: web
+    name: desci-sentinel-backend
+    env: node
+    region: oregon
+    rootDir: desci-sentinel-backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: PINATA_API_KEY
+        sync: false
+      - key: PINATA_API_SECRET
+        sync: false
+      - key: PINATA_JWT
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: SOLANA_RPC_URL
+        sync: false
+      - key: AGENT_WALLET_KEYPAIR
+        sync: false
+      - key: PORT
+        value: "10000"
+      - key: ALLOWED_ORIGINS
+        value: "*" 
+
+  # ==========================================
+  # DeSci Sentinel Dashboard Frontend (Static)
+  # ==========================================
+  - type: web
+    name: desci-sentinel-frontend
+    env: static
+    region: oregon
+    rootDir: Frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: VITE_BACKEND_URL
+        fromService:
+          type: web
+          name: desci-sentinel-backend
+          envVarKey: RENDER_EXTERNAL_URL
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

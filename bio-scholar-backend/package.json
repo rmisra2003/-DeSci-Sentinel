@@ -1,0 +1,46 @@
+{
+  "name": "desci-sentinel-backend",
+  "version": "2.1.0",
+  "description": "Autonomous DeSci Agent for Bio Protocol — BioDAO token lists + Solana grants",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts",
+    "test": "anchor test"
+  },
+  "keywords": [
+    "solana",
+    "desci",
+    "bio-protocol",
+    "biodao"
+  ],
+  "author": "DeSci Sentinel Team",
+  "license": "MIT",
+  "dependencies": {
+    "@solana/spl-memo": "^0.2.5",
+    "@solana/spl-token": "^0.4.9",
+    "@solana/web3.js": "^1.98.0",
+    "axios": "^1.7.9",
+    "axios-retry": "^3.9.1",
+    "chalk": "^5.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^8.2.1",
+    "ipfs-http-client": "^60.0.1",
+    "socket.io": "^4.8.3",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/express-rate-limit": "^5.1.3",
+    "@types/node": "^22.10.0",
+    "prettier": "^3.4.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
