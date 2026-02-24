@@ -52,6 +52,17 @@ DeSci Sentinel acts as a **discovery layer** for the Bio.xyz ecosystem. It uses 
 - **AI**: Tavily Search API for plagiarism, LLM for scoring
 - **Deployment**: Render (single-service deployment via root `package.json`)
 
+## Future Vision
+
+The payout system is built to be **token-agnostic** — it only needs a mint address and a recipient wallet. Right now it uses a custom Devnet SPL token to simulate grants.
+
+If Bio Protocol ever issues an official **$BIO SPL token on Solana**, DeSci Sentinel could become a real autonomous grant agent:
+1. Evaluate submitted research (ownership, plagiarism, quality scoring)
+2. Route it to the right BioDAO based on the research topic
+3. Distribute actual $BIO funding to the researcher's wallet
+
+The entire pipeline is already built and working. The only missing piece is a real token mint address — which is a single environment variable swap.
+
 ## Running Locally
 
 ### Prerequisites

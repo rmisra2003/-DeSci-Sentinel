@@ -329,60 +329,78 @@ export default function App() {
                     {/* Judges Brief */}
                     <section id="judges" className="w-full max-w-4xl space-y-6 scroll-mt-24">
                       <div className="flex items-center justify-between">
-                        <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">Judges Brief</h2>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">Hackathon Guide</span>
+                        <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">For the Judges</h2>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">Quick Guide</span>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Top summary */}
+                      <div className="glass-card p-6 rounded-xl border border-emerald-500/20 bg-emerald-500/5">
+                        <p className="text-sm text-white/70 leading-relaxed">
+                          <span className="text-emerald-400 font-semibold">DeSci Sentinel</span> is a research evaluation tool that helps scientists find the right BioDAO for their work.
+                          A researcher uploads their paper to IPFS, submits the link here, and our AI checks if it's original, scores it, and tells them which of the 10 BioDAOs on <a href="https://bio.xyz" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline underline-offset-2 hover:text-emerald-300">bio.xyz</a> is the best match for funding.
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* Try It */}
                         <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
                           <div className="flex items-center gap-2 text-emerald-400">
                             <Activity className="w-4 h-4" />
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">2-Minute Demo Script</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Try It (2 min)</span>
                           </div>
                           <ol className="list-decimal list-inside text-sm text-white/70 leading-relaxed space-y-2">
-                            <li>Open the Live feed and submit an IPFS CID.</li>
-                            <li>Watch the ownership, uniqueness, and freshness checks run live.</li>
-                            <li>Open the result card to see which BioDAO was recommended.</li>
-                            <li>If trust &gt; 80 and wallet connected, a Devnet payout is triggered.</li>
+                            <li>Scroll down to the live feed.</li>
+                            <li>Paste any IPFS CID and hit submit.</li>
+                            <li>Watch the 3-step verification run live.</li>
+                            <li>Open the result to see scores + BioDAO match.</li>
                           </ol>
                         </div>
 
-                        <div className="glass-card p-6 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-4">
+                        {/* What's Real */}
+                        <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
                           <div className="flex items-center gap-2 text-emerald-400">
                             <CheckCircle className="w-4 h-4" />
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">What Is Real</span>
-                          </div>
-                          <div className="space-y-3 text-sm text-white/70 leading-relaxed">
-                            <p>✅ IPFS ownership verification checks real Pinata metadata against connected wallets.</p>
-                            <p>✅ Plagiarism detection uses Tavily AI to search the live web for existing publications.</p>
-                            <p>✅ BioDAO routing maps research keywords to 10 real BioDAOs from the Bio.xyz ecosystem.</p>
-                            <p>✅ Solana Devnet payouts are real on-chain transactions (viewable on Solana Explorer).</p>
-                            <p className="text-white/40 text-xs">ℹ️ The $BIO token used is our own Devnet mint, not Bio Protocol's mainnet token. BioDAO discovery is educational — we do not submit to DAOs on your behalf.</p>
-                          </div>
-                        </div>
-
-                        <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
-                          <div className="flex items-center gap-2 text-emerald-400">
-                            <FileText className="w-4 h-4" />
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Proof Points</span>
-                          </div>
-                          <div className="space-y-2 text-xs text-white/70 font-mono">
-                            <div>`GET /api/health` — backend status + agent metadata.</div>
-                            <div>`POST /api/evaluate` — full scoring pipeline + BioDAO recommendation.</div>
-                            <div>`GET /api/bio/daos` — lists all 10 BioDAOs with metadata.</div>
-                          </div>
-                        </div>
-
-                        <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
-                          <div className="flex items-center gap-2 text-emerald-400">
-                            <Network className="w-4 h-4" />
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Network + Payouts</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">What's Real</span>
                           </div>
                           <div className="space-y-2 text-sm text-white/70 leading-relaxed">
-                            <p>Cluster: {network} (Solana Devnet).</p>
-                            <p>Payouts use a custom Devnet SPL token simulating a BioDAO grant.</p>
-                            <p>Wallet signature is required only when claiming payouts.</p>
+                            <p>✅ Ownership check — verifies you own the IPFS file.</p>
+                            <p>✅ Plagiarism scan — searches the web for copies.</p>
+                            <p>✅ AI scoring — rates your research quality.</p>
+                            <p>✅ BioDAO match — recommends a real Bio.xyz DAO.</p>
+                            <p>✅ Solana payout — real Devnet transaction.</p>
                           </div>
+                        </div>
+
+                        {/* What's Simulated */}
+                        <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
+                          <div className="flex items-center gap-2 text-amber-400">
+                            <Shield className="w-4 h-4" />
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">What's Simulated</span>
+                          </div>
+                          <div className="space-y-2 text-sm text-white/70 leading-relaxed">
+                            <p>⚠️ The token is our own Devnet mint, not Bio's real $BIO.</p>
+                            <p>⚠️ We don't submit to BioDAOs for you — we show you where to go.</p>
+                            <p>⚠️ Scoring is AI-based heuristics, not formal peer review.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Future Vision — Full Width */}
+                      <div className="glass-card p-8 rounded-xl border border-purple-500/20 bg-purple-500/5 space-y-4">
+                        <div className="flex items-center gap-2 text-purple-400">
+                          <Zap className="w-5 h-5" />
+                          <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Future Vision — What Bio.xyz Could Integrate</span>
+                        </div>
+                        <p className="text-sm text-white/70 leading-relaxed">
+                          Right now, DeSci Sentinel uses a custom Devnet token to simulate grant payouts. But the payout system is built to be <span className="text-purple-300 font-semibold">token-agnostic</span> — it only needs a mint address and a recipient wallet.
+                        </p>
+                        <p className="text-sm text-white/70 leading-relaxed">
+                          If Bio Protocol ever issues an official <span className="text-purple-300 font-semibold">$BIO SPL token on Solana</span>, DeSci Sentinel could become a real autonomous grant agent: evaluate research, route it to the right BioDAO, and distribute actual funding — all without human intervention. The entire evaluation pipeline (ownership, plagiarism, scoring, routing) is already built and working. The only missing piece is a real token.
+                        </p>
+                        <div className="flex flex-wrap gap-3 mt-2">
+                          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-purple-500/10 border border-purple-500/20 text-purple-300">Modular Payout System</span>
+                          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-purple-500/10 border border-purple-500/20 text-purple-300">Swap Token Mint in .env</span>
+                          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-purple-500/10 border border-purple-500/20 text-purple-300">Bio.xyz Solana Programs</span>
                         </div>
                       </div>
                     </section>
