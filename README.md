@@ -1,57 +1,75 @@
 # 🛡️ DeSci Sentinel
 
-An autonomous web application that evaluates decentralized science (DeSci) research, verifies ownership, checks for plagiarism, and routes approved grants to BioDAOs using the Solana Devnet.
+An autonomous research evaluation agent that helps scientists discover the right BioDAO in the [Bio.xyz](https://bio.xyz) ecosystem for their work.
 
-## 📝 What It Actually Does
+## What It Does
 
-DeSci Sentinel is a prototype designed to demonstrate how scientific research can be automatically verified and funded on-chain. When a user submits an IPFS Content Identifier (CID) containing their research, the backend performs several strict verifications before simulating a grant payout.
+DeSci Sentinel is a prototype that demonstrates how scientific research can be automatically evaluated, scored, and matched to the most relevant funding DAO. When a user submits an IPFS Content Identifier (CID) containing their research:
 
-### 1. The Verification Pipeline
-1. **IPFS Ingestion**: The backend fetches the raw research content and metadata from the IPFS network (via Pinata).
-2. **Absolute Ownership**: It checks the Pinata Key-Value tags or internal JSON metadata. If the user connected a Solana wallet, the backend verifies that the connected wallet exactly matches the wallet address embedded in the IPFS metadata.
-3. **Plagiarism & Freshness (Tavily AI)**: The content is summarized and searched against the live web using the Tavily AI Search API to ensure the research is novel and not plagiarized from existing publications.
-4. **Internal Duplicate Check**: A basic SHA-256 fingerprinting system ensures the exact same content hasn't already been funded by the platform.
-5. **Heuristic Evaluation (OpenAI)**: An LLM evaluates the text and assigns scores out of 25 for: *Reproducibility, Methodology, Novelty,* and *Impact*. 
-6. **BioDAO Routing**: Based on keywords in the text (e.g., "longevity", "quantum", "psychedelics"), the system routes the research to 1 of 10 supported BioDAOs (VitaDAO, HairDAO, CryoDAO, etc.).
+1. **Ownership Verification** — Checks Pinata IPFS metadata to confirm the submitter's connected wallet matches the wallet embedded in the research metadata.
+2. **Plagiarism & Freshness** — Uses the Tavily AI Search API to search the live web and ensure the research is novel and not copied from existing publications.
+3. **Duplicate Detection** — SHA-256 fingerprinting prevents the same content from being funded twice.
+4. **AI Scoring** — An LLM evaluates the text and assigns scores (out of 25) for Reproducibility, Methodology, Novelty, and Impact.
+5. **BioDAO Discovery** — Based on keywords in the research (e.g., "longevity", "psychedelics", "cryopreservation"), the AI recommends which of the 10 active BioDAOs is the best match:
 
-### 2. On-Chain Payouts (Solana Devnet)
-If a submission passes all security checks and achieves a high enough Trust Score (> 80%), and the user signed the request with their Solana wallet, the system automatically executes a Devnet transaction transferring a simulated BioDAO token (or SOL fallback) to the researcher.
+   | BioDAO | Focus Area |
+   |---|---|
+   | [VitaDAO](https://vitadao.com) | Longevity |
+   | [HairDAO](https://hairdao.xyz) | Dermatology |
+   | [PsyDAO](https://psydao.io) | Psychedelic Medicine |
+   | [CryoDAO](https://cryodao.org) | Cryobiology |
+   | [AthenaDAO](https://athenadao.co) | Women's Health |
+   | [ValleyDAO](https://valleydao.bio) | Synthetic Biology |
+   | [CerebrumDAO](https://cerebrumdao.com) | Neuroscience |
+   | [Curetopia](https://curetopia.xyz) | Rare Diseases |
+   | [Long COVID Labs](https://longcovidlabs.org) | Post-Viral Syndromes |
+   | [Quantum Biology DAO](https://quantumbiology.xyz) | Quantum Biology |
 
----
+6. **Simulated Grant Payout** — If the research scores above an 80% trust threshold and the user signs with their Solana wallet, a Devnet transaction is executed simulating a BioDAO grant.
 
-## 🛠️ System Architecture
+## How It Connects to Bio.xyz
 
-- **Frontend (`/Frontend`)**: React 19 + Vite + TailwindCSS. Uses `@solana/wallet-adapter-react` to connect to Phantom/Solflare wallets and sign claiming messages. Features a real-time WebSocket connection to display the evaluation stepper.
-- **Backend (`/bio-scholar-backend`)**: Node.js + Express + TypeScript. 
-  - `Socket.IO`: Streams live logs and stepper updates to the frontend.
-  - `@solana/web3.js`: Constructs and sends devnet payout transactions.
-  - `tweetnacl`: Cryptographically verifies the frontend wallet signatures against the requested CID.
-- **Deployment**: Configured for Render via `render.yaml` (Frontend as a Static Site, Backend as a Node Web Service).
+DeSci Sentinel acts as a **discovery layer** for the Bio.xyz ecosystem. It uses publicly available information about the 10 active BioDAOs (names, focus areas, websites) and maps research submissions to the most relevant one using AI keyword analysis.
 
----
+**What is real:**
+- ✅ The 10 BioDAOs listed are real organizations in the Bio.xyz ecosystem
+- ✅ IPFS ownership verification runs against real Pinata metadata
+- ✅ Plagiarism detection searches the live web via Tavily AI
+- ✅ Solana Devnet payouts are real on-chain transactions
+- ✅ The Bio Launchpad feed scrapes live data from `app.bio.xyz`
 
-## 🚀 Running Locally
+**What is simulated:**
+- ℹ️ The $BIO token is our own Devnet mint, not Bio Protocol's mainnet token
+- ℹ️ BioDAO discovery is educational — we do not submit to DAOs on your behalf
+- ℹ️ The scoring model is a heuristic LLM evaluation, not peer review
+
+## Tech Stack
+
+- **Frontend**: React 19 + Vite + TailwindCSS + `@solana/wallet-adapter-react`
+- **Backend**: Node.js + Express + TypeScript + Socket.IO
+- **Blockchain**: Solana Devnet (`@solana/web3.js`, `@solana/spl-token`)
+- **Storage**: IPFS via Pinata
+- **AI**: Tavily Search API for plagiarism, LLM for scoring
+- **Deployment**: Render (single-service deployment via root `package.json`)
+
+## Running Locally
 
 ### Prerequisites
-- Node.js (v20+)
-- A Pinata JWT (for IPFS fetching)
-- An OpenAI API Key
-- A Tavily API Key
-- A Solana Devnet Keypair Private Key (Base58 encoded)
+- Node.js v20+
+- Pinata JWT, Tavily API Key, Solana Devnet Keypair
 
-### Backend Setup
-1. `cd bio-scholar-backend`
-2. `npm install`
-3. Create a `.env` file based on the required variables outlined above.
-4. `npm run dev` (Runs on port 3001)
+### Backend
+```bash
+cd bio-scholar-backend
+npm install
+# Create .env with PINATA_JWT, TAVILY_API_KEY, AGENT_WALLET_KEYPAIR
+npm run dev  # Runs on port 3001
+```
 
-### Frontend Setup
-1. `cd Frontend`
-2. `npm install`
-3. Create a `.env` file with `VITE_BACKEND_URL=http://localhost:3001`
-4. `npm run dev` (Runs on port 3000)
-
----
-
-> **Note for Hackathon Judges:**
-> This repository contains everything required to run the DeSci Sentinel evaluation pipeline locally. The devnet token mints, BioDAO token lists, and AI scoring mechanisms are fully functional endpoints. Check `App.tsx` and the frontend UI for a specific "Judges Brief" guiding you through a live demonstration!
+### Frontend
+```bash
+cd Frontend
+npm install
+# Create .env with VITE_BACKEND_URL=http://localhost:3001
+npm run dev  # Runs on port 3000
+```

@@ -86,12 +86,12 @@ export default function App() {
                         </div>
 
                         <KineticHeadline
-                          text="BioDAO Research Evaluation"
+                          text="Find Your BioDAO"
                           className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight"
                         />
 
                         <p className="max-w-xl mx-auto text-white/40 text-sm md:text-base font-medium leading-relaxed">
-                          DeSci Sentinel evaluates IPFS research submissions, maps them to BioDAOs, and triggers Solana grants when trust scores qualify.
+                          DeSci Sentinel evaluates your research and tells you exactly which BioDAO in the Bio.xyz ecosystem is the best fit for your work — so you know where to apply for funding.
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4">
@@ -120,20 +120,20 @@ export default function App() {
                       <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
                         <div className="flex items-center gap-2 text-white/40">
                           <Shield className="w-4 h-4" />
-                          <span className="font-mono text-[10px] uppercase tracking-widest text-emerald-500/80">Heuristic Scoring</span>
+                          <span className="font-mono text-[10px] uppercase tracking-widest text-emerald-500/80">AI Research Scoring</span>
                         </div>
                         <p className="text-sm text-white/70 leading-relaxed font-sans">
-                          Lightweight scoring based on reproducibility, methodology, novelty, and impact signals from the submission text.
+                          Scores your research across reproducibility, methodology, novelty, and impact — then recommends the most relevant BioDAO for your work.
                         </p>
                       </div>
 
                       <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
                         <div className="flex items-center gap-2 text-white/40">
                           <Terminal className="w-4 h-4" />
-                          <span className="font-mono text-[10px] uppercase tracking-widest text-purple-400">BioDAO Token Lists</span>
+                          <span className="font-mono text-[10px] uppercase tracking-widest text-purple-400">Bio.xyz Ecosystem Map</span>
                         </div>
                         <p className="text-sm text-white/70 leading-relaxed font-sans">
-                          Pulls BioDAO token metadata from public Bio token lists and checks on-chain status when available.
+                          Connects researchers to 10 active BioDAOs (VitaDAO, HairDAO, PsyDAO, CryoDAO, and more) with direct links to their websites and focus areas.
                         </p>
                       </div>
                     </section>
@@ -174,10 +174,10 @@ export default function App() {
                         <div className="glass-card p-6 rounded-xl border border-white/5 space-y-3">
                           <div className="flex items-center gap-2 text-emerald-400">
                             <Activity className="w-4 h-4" />
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">BioDAO Map</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">BioDAO Discovery</span>
                           </div>
                           <p className="text-sm text-white/70 leading-relaxed">
-                            Each evaluation recommends the most relevant BioDAO and logs a verification hash for auditability.
+                            AI maps your research keywords to the most relevant BioDAO in the Bio.xyz ecosystem and educates you on where to apply for grants.
                           </p>
                         </div>
 
@@ -285,6 +285,47 @@ export default function App() {
                       </div>
                     </section>
 
+                    {/* Bio.xyz Ecosystem Discovery */}
+                    <section id="bio-ecosystem" className="w-full max-w-4xl space-y-6 scroll-mt-24">
+                      <div className="flex items-center justify-between">
+                        <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">Bio.xyz Ecosystem</h2>
+                        <a href="https://bio.xyz" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400 hover:text-emerald-300 transition-colors">bio.xyz ↗</a>
+                      </div>
+
+                      <div className="glass-card p-8 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-6">
+                        <div className="space-y-3">
+                          <h3 className="text-lg font-bold text-white/90">How DeSci Sentinel Connects You to Bio.xyz</h3>
+                          <p className="text-sm text-white/60 leading-relaxed">
+                            Bio.xyz is a decentralized science ecosystem with 10 active BioDAOs — each funding a specific area of scientific research. DeSci Sentinel acts as a <span className="text-emerald-400 font-semibold">discovery layer</span>: it analyzes your research, scores it, and tells you which BioDAO is the best match for your work.
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                          {[
+                            { name: 'VitaDAO', focus: 'Longevity', url: 'https://vitadao.com' },
+                            { name: 'HairDAO', focus: 'Dermatology', url: 'https://hairdao.xyz' },
+                            { name: 'PsyDAO', focus: 'Psychedelics', url: 'https://psydao.io' },
+                            { name: 'CryoDAO', focus: 'Cryobiology', url: 'https://cryodao.org' },
+                            { name: 'AthenaDAO', focus: "Women's Health", url: 'https://athenadao.co' },
+                            { name: 'ValleyDAO', focus: 'Synth Bio', url: 'https://valleydao.bio' },
+                            { name: 'CerebrumDAO', focus: 'Neuro', url: 'https://cerebrumdao.com' },
+                            { name: 'Curetopia', focus: 'Rare Disease', url: 'https://curetopia.xyz' },
+                            { name: 'Long COVID', focus: 'Post-Viral', url: 'https://longcovidlabs.org' },
+                            { name: 'Quantum Bio', focus: 'Quantum', url: 'https://quantumbiology.xyz' },
+                          ].map((dao) => (
+                            <a key={dao.name} href={dao.url} target="_blank" rel="noopener noreferrer" className="glass-card p-3 rounded-lg border border-white/5 hover:border-emerald-500/30 transition-all hover:scale-105 group text-center">
+                              <div className="font-mono text-[9px] uppercase tracking-widest text-emerald-400 group-hover:text-emerald-300">{dao.name}</div>
+                              <div className="text-[8px] text-white/40 mt-1">{dao.focus}</div>
+                            </a>
+                          ))}
+                        </div>
+
+                        <p className="text-xs text-white/40 leading-relaxed">
+                          When you submit research, our AI identifies the keywords that match each BioDAO's focus area and recommends where you should apply. This is an educational tool — it does not submit to BioDAOs on your behalf.
+                        </p>
+                      </div>
+                    </section>
+
                     {/* Judges Brief */}
                     <section id="judges" className="w-full max-w-4xl space-y-6 scroll-mt-24">
                       <div className="flex items-center justify-between">
@@ -300,21 +341,23 @@ export default function App() {
                           </div>
                           <ol className="list-decimal list-inside text-sm text-white/70 leading-relaxed space-y-2">
                             <li>Open the Live feed and submit an IPFS CID.</li>
-                            <li>Watch the live evaluation steps update in real time.</li>
-                            <li>Open the result card to review scores and BioDAO routing.</li>
-                            <li>Confirm a payout appears when trust &gt; 80 (BIO or SOL).</li>
+                            <li>Watch the ownership, uniqueness, and freshness checks run live.</li>
+                            <li>Open the result card to see which BioDAO was recommended.</li>
+                            <li>If trust &gt; 80 and wallet connected, a Devnet payout is triggered.</li>
                           </ol>
                         </div>
 
-                        <div className="glass-card p-6 rounded-xl border border-white/5 space-y-4">
+                        <div className="glass-card p-6 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-4">
                           <div className="flex items-center gap-2 text-emerald-400">
                             <CheckCircle className="w-4 h-4" />
                             <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">What Is Real</span>
                           </div>
                           <div className="space-y-3 text-sm text-white/70 leading-relaxed">
-                            <p>Solana payouts run on-chain and are visible in the feed when triggered.</p>
-                            <p>BioDAO tokens are pulled from Bio public token lists and checked for Solana mints.</p>
-                            <p>Evaluations use deterministic scoring (reproducibility, methodology, novelty, impact).</p>
+                            <p>✅ IPFS ownership verification checks real Pinata metadata against connected wallets.</p>
+                            <p>✅ Plagiarism detection uses Tavily AI to search the live web for existing publications.</p>
+                            <p>✅ BioDAO routing maps research keywords to 10 real BioDAOs from the Bio.xyz ecosystem.</p>
+                            <p>✅ Solana Devnet payouts are real on-chain transactions (viewable on Solana Explorer).</p>
+                            <p className="text-white/40 text-xs">ℹ️ The $BIO token used is our own Devnet mint, not Bio Protocol's mainnet token. BioDAO discovery is educational — we do not submit to DAOs on your behalf.</p>
                           </div>
                         </div>
 
@@ -324,9 +367,9 @@ export default function App() {
                             <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Proof Points</span>
                           </div>
                           <div className="space-y-2 text-xs text-white/70 font-mono">
-                            <div>`GET /api/health` confirms backend + token list status.</div>
-                            <div>`POST /api/evaluate` returns scores, BioDAO, and trust score.</div>
-                            <div>`GET /api/biodao/tokens?onchain=true` shows token mint validation.</div>
+                            <div>`GET /api/health` — backend status + agent metadata.</div>
+                            <div>`POST /api/evaluate` — full scoring pipeline + BioDAO recommendation.</div>
+                            <div>`GET /api/bio/daos` — lists all 10 BioDAOs with metadata.</div>
                           </div>
                         </div>
 
@@ -336,8 +379,8 @@ export default function App() {
                             <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Network + Payouts</span>
                           </div>
                           <div className="space-y-2 text-sm text-white/70 leading-relaxed">
-                            <p>Cluster: {network} (RPC: {endpoint}).</p>
-                            <p>Payouts attempt BIO transfers first and fall back to SOL.</p>
+                            <p>Cluster: {network} (Solana Devnet).</p>
+                            <p>Payouts use a custom Devnet SPL token simulating a BioDAO grant.</p>
                             <p>Wallet signature is required only when claiming payouts.</p>
                           </div>
                         </div>
@@ -422,10 +465,10 @@ export default function App() {
                         <div className="glass-card p-6 rounded-xl border border-white/5 space-y-3">
                           <div className="flex items-center gap-2 text-emerald-400">
                             <Terminal className="w-4 h-4" />
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">BioDAO Tokens</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">BioDAO Discovery</span>
                           </div>
-                          <p className="text-sm text-white/70">Pulled from Bio public token lists.</p>
-                          <p className="text-xs text-white/50">On-chain validation runs against the Solana mint registry.</p>
+                          <p className="text-sm text-white/70">10 BioDAOs from the Bio.xyz ecosystem.</p>
+                          <p className="text-xs text-white/50">AI-powered keyword matching routes your research to the right DAO.</p>
                         </div>
                       </div>
                     </section>
