@@ -4,7 +4,7 @@
     "private": true,
     "description": "DeSci Sentinel monorepo — Backend + Frontend",
     "scripts": {
-        "postinstall": "cd bio-scholar-backend && npm install && npm run build",
+        "postinstall": "cd bio-scholar-backend && npm install && npm run build && cd ../Frontend && npm install && npm run build && cp -r dist ../bio-scholar-backend/frontend-dist",
         "start": "cd bio-scholar-backend && npm start"
     }
 }

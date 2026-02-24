@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import rateLimit from 'express-rate-limit';
@@ -516,11 +518,27 @@ io.on('connection', (socket) => {
     });
 });
 
+// ─── Serve Frontend (Production) ─────────────────────────────────────────
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDist = path.resolve(__dirname, '../../frontend-dist');
+
+import fs from 'fs';
+if (fs.existsSync(frontendDist)) {
+    console.log(`📦 Serving frontend from ${frontendDist}`);
+    app.use(express.static(frontendDist));
+    app.get('*', (_req, res) => {
+        res.sendFile(path.join(frontendDist, 'index.html'));
+    });
+} else {
+    console.log('ℹ️  No frontend build found, running API-only mode.');
+}
+
 // ─── Start ───────────────────────────────────────────────────────────────
 const PORT = parseInt(process.env.PORT || '3001', 10);
 
 httpServer.listen(PORT, () => {
-    console.log(`\n🚀 Bio - Scholar Backend v2.0 Live on http://localhost:${PORT}`);
+    console.log(`\n🚀 DeSci Sentinel v2.0 Live on http://localhost:${PORT}`);
     console.log(`   ├── REST API:     http://localhost:${PORT}/api`);
     console.log(`   ├── Socket.IO:    ws://localhost:${PORT}`);
     console.log(`   ├── BIO Token:    ${process.env.BIO_TOKEN_MINT || 'Not Set'}`);
