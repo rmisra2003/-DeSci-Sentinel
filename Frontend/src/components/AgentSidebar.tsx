@@ -146,57 +146,26 @@ export const AgentSidebar = ({ connected = false, logsCount = 0 }: AgentSidebarP
 
         {/* BioDAO List */}
         <div className="pt-4">
-          <h4 className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20 mb-4">BioDAO Tokens (On-chain)</h4>
-          <div className="flex items-center gap-3 text-[9px] font-mono uppercase text-white/30 mb-3">
-            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> On-chain</span>
-            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Non-Solana</span>
-            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-rose-500" /> Missing</span>
-          </div>
+          <h4 className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20 mb-4">Bio.xyz Ecosystem</h4>
           <div className="space-y-2">
-            {(daoTokens.length > 0
-              ? daoTokens.map((dao) => {
-                  let status = 'Unknown';
-                  let color = 'bg-white/30';
-                  if (dao.onChain) {
-                    if (dao.onChain.exists) {
-                      status = 'On-chain';
-                      color = 'bg-emerald-500';
-                    } else if (dao.onChain.error === 'unsupported-chain' || dao.onChain.error === 'evm-address') {
-                      status = 'Non-Solana';
-                      color = 'bg-amber-500';
-                    } else if (dao.onChain.error === 'not-found') {
-                      status = 'Missing';
-                      color = 'bg-rose-500';
-                    } else {
-                      status = 'Invalid';
-                      color = 'bg-rose-500';
-                    }
-                  }
-                  return {
-                    name: dao.name,
-                    symbol: dao.symbol,
-                    status,
-                    color,
-                  };
-                })
-              : [
-                  { name: 'VitaDAO', symbol: 'VITA', status: 'Unknown', color: 'bg-white/30' },
-                  { name: 'HairDAO', symbol: 'HAIR', status: 'Unknown', color: 'bg-white/30' },
-                  { name: 'ValleyDAO', symbol: 'VALLEY', status: 'Unknown', color: 'bg-white/30' },
-                  { name: 'AthenaDAO', symbol: 'ATHENA', status: 'Unknown', color: 'bg-white/30' },
-                ]
-            ).map((dao, i) => (
+            {[
+              { name: 'VitaDAO', focus: 'Longevity' },
+              { name: 'HairDAO', focus: 'Dermatology' },
+              { name: 'PsyDAO', focus: 'Psychedelics' },
+              { name: 'CryoDAO', focus: 'Cryobiology' },
+              { name: 'AthenaDAO', focus: "Women's Health" },
+              { name: 'ValleyDAO', focus: 'Synth Bio' },
+              { name: 'CerebrumDAO', focus: 'Neuroscience' },
+              { name: 'Curetopia', focus: 'Rare Disease' },
+              { name: 'Long COVID Labs', focus: 'Post-Viral' },
+              { name: 'Quantum Bio DAO', focus: 'Quantum Biology' },
+            ].map((dao, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5 hover:border-white/10 transition-colors"
+                className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5 hover:border-emerald-500/20 transition-colors"
               >
-                <span className="font-mono text-[11px] text-white/70">
-                  {dao.name}{dao.symbol ? ` (${dao.symbol})` : ''}
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <div className={`w-1 h-1 rounded-full ${dao.color}`} />
-                  <span className="font-mono text-[9px] text-white/30 uppercase">{dao.status}</span>
-                </div>
+                <span className="font-mono text-[11px] text-white/70">{dao.name}</span>
+                <span className="font-mono text-[9px] text-emerald-500/50">{dao.focus}</span>
               </div>
             ))}
           </div>
